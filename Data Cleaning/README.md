@@ -1,4 +1,4 @@
-# CourseraGettingAndCleaningDataFinalProject
+# Getting And Cleaning Data Final Project
 
 ##Overview
 
