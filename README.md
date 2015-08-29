@@ -2,11 +2,10 @@
 
 The following are some examples of work done on various projects
 
-### P1
-#### Details (Date, Language, etc.)
+#### Data Cleaning
 
-### P2
-#### Details (Date, Language, etc.)
+#### Machine Learning
 
-### P3
-#### Details (Date, Language, etc.)
+#### Regression Analysis
+
+#### Shiny Project
