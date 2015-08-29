@@ -1,0 +1,79 @@
+---
+title: 'Motor Trend: Automatic vs. Manual Transmission'
+author: "Dax Gerts"
+date: "July 20, 2015"
+output: html_document
+---
+
+## Executive Summary
+
+This report examines the data provided by R's `mtcars` dataset, originally collected by the Motor Trend US magazine in 1974. `mtcars` details the miles per gallon rating and 10 other aspects of car design obtained from observation of 32 automobiles.
+
+In this report, we will attempt to answer the question of whether automatic or manual transmission provide higher miles per gallon, and in doing so will attempt to quantify those differences.
+
+
+## Exploratory Analysis
+
+The data was first extracted from `mtcars` being preprocessed for analysis. 
+
+```{r, eval = TRUE, results='hide'}
+## Load and store dataset, "mtcars"
+library(datasets)
+data(mtcars)
+cars <- mtcars
+## Factor variables converted from numeric
+cars$cyl <- as.factor(cars$cyl)
+cars$vs <- as.factor(cars$vs)
+cars$am <- as.factor(cars$am)
+cars$gear <- as.factor(cars$gear)
+cars$carb <- as.factor(cars$carb)
+```
+
+Some basic exploratory analyses were conducted as follows. Please consult the Appendix for the graphical results.
+
+```{r, eval = FALSE}
+library(ggplot2)
+## Histogram (MPG Distribution), Appendix.1
+ggplot(cars,aes(x=mpg)) +
+  geom_histogram(binwidth=1) +
+  ggtitle("MPG Distribution") +
+  xlab("Miles pegr Gallon (MPG)") +
+  ylab("Frequency")
+## Boxplot: Manual vs. Automatic Transmission by MPG, Appendix.2
+boxplot(mpg~am,cars,title="Manual vs. Automatic Transmission by MPG",xlab="Transmission",ylab="MPG",names=c("Automatic","Manual"))
+```
+
+These results suggested that manual and automatic transmission yield distinct results in mpg, and that manual transmission tends to resut in higher mpg values. This was verified quantitatively by taking a t test of the relation between mpg and transmission.
+
+```{r}
+t.test(cars$mpg ~ cars$am)$p.value
+t.test(cars$mpg ~ cars$am)$estimate
+```
+A a p-value of 0.00137 is sufficiently low enough to reject the null hypothesis, verifying the factors are unique populations. This is further verified by the approximately 7 mpg difference between automatic and manual transmissions.
+
+
+
+
+```
+
+\newpage
+## Appendix
+
+1.
+```{r}
+## Histogram (MPG Distribution)
+library(ggplot2)
+ggplot(cars,aes(x=mpg)) +
+  geom_histogram(binwidth=1) +
+  ggtitle("MPG Distribution") +
+  xlab("Miles pegr Gallon (MPG)") +
+  ylab("Frequency")
+```
+
+2. 
+```{r}
+## Boxplot: Manual vs. Automatic Transmission by MPG
+boxplot(mpg~am,cars,title="Manual vs. Automatic Transmission by MPG",xlab="Transmission",ylab="MPG",names=c("Automatic","Manual"))
+```
+
+
